@@ -1,0 +1,11 @@
+runtime: nodejs
+env: flex
+network:
+  instance_tag: web
+  name: default
+  forwarded_ports:
+    - 3000/tcp
+resources:
+  cpu: 1
+  memory_gb: 0.6
+  disk_size_gb: 10
