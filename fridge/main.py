@@ -22,7 +22,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
+def home():
     """Return a friendly HTTP greeting."""
     return 'Smarter Fridge Back-end website'
 
