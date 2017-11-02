@@ -24,7 +24,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     """Return a friendly HTTP greeting."""
-    return app.send_static_file('html/home.html')
+    return app.send_static_file('home.html')
 
 @app.errorhandler(500)
 def server_error(e):
