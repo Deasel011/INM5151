@@ -1,0 +1,7 @@
+{
+  "RESULT_TOPIC": "factures",
+  "RESULT_BUCKET": "json_facture",
+  "TRANSLATE_TOPIC": "fac_to_json",
+  "TRANSLATE": true,
+  "TO_LANG": ["en", "fr"]
+}
