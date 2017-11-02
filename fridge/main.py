@@ -24,7 +24,13 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     """Return a friendly HTTP greeting."""
-    return 'Smarter Fridge Back-end website'
+    return 'Smarter Fridge Back-end website\n' \
+           'MOCK API\n' \
+           'URL:\n' \
+           '\tPOST: /snd_fact/<userid>_<image_id>\n' \
+           '\n' \
+           'JSON EXAMPLE:\n' \
+           ''
 
 
 @app.errorhandler(500)
