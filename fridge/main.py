@@ -30,7 +30,7 @@ def home():
            '\tPOST: /snd_fact/<userid>_<image_id>\n' \
            '\n' \
            'JSON EXAMPLE:\n' \
-           ''
+           '{"text": "Bar Ho\n391 King Street West\nToronto, Ontario\nTel:\nCheck #: 386111\nServer: Phil\nTabie: 16\nDate: 10/21/2017\nTime: 18:59\nClient1\n:\nin us on an e\nrror me\n7.50\n13oz Fruit Helmet\n1 13oz Grimace''s Tears\n14oz Cask 1\n6.75\n2.50\n. . . on an\nerror -\nDe\n-\n-\n-\nSUB-TOTAL:\nHST:\n16.75\n2. 18\nS HE Dr S DO NOPD GOOD\nTOTAL:\n18.93\np, as more\nHST# 830210308RTO001\nFollow us on Untappd &amp; Twitter\nObarhopbar\n"}'
 
 
 @app.errorhandler(500)
