@@ -1,3 +1,21 @@
+/**
+ * Copyright 2016, Google, Inc.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+'use strict';
+
+// [START functions_ocr_setup]
 const config = require('./config.json');
 
 // Get a reference to the Pub/Sub component
@@ -10,37 +28,22 @@ const vision = require('@google-cloud/vision')();
 const translate = require('@google-cloud/translate')();
 
 const Buffer = require('safe-buffer').Buffer;
+// [END functions_ocr_setup]
 
+// [START functions_ocr_publish]
 /**
- * Cloud Function triggered by Cloud Storage when a file is uploaded.
+ * Publishes the result to the given pubsub topic and returns a Promise.
  *
- * @param {object} event The Cloud Functions event.
- * @param {object} event.data A Google Cloud Storage File object.
+ * @param {string} topicName Name of the topic on which to publish.
+ * @param {object} data The message data to publish.
  */
-exports.processImage = function processImage (event) {
-  let file = event.data;
+function publishResult (topicName, data) {
+  return pubsub.topic(topicName).get({ autoCreate: true })
+    .then(([topic]) => topic.publish(data));
+}
+// [END functions_ocr_publish]
 
-  return Promise.resolve()
-    .then(() => {
-      if (file.resourceState === 'not_exists') {
-        // This was a deletion event, we don't want to process this
-        return;
-      }
-
-      if (!file.bucket) {
-        throw new Error('Bucket not provided. Make sure you have a "bucket" property in your request');
-      }
-      if (!file.name) {
-        throw new Error('Filename not provided. Make sure you have a "name" property in your request');
-      }
-
-      return detectText(file.bucket, file.name);
-    })
-    .then(() => {
-      console.log(`File ${file.name} processed.`);
-    });
-};
-
+// [START functions_ocr_detect]
 /**
  * Detects the text in an image using the Google Vision API.
  *
@@ -84,6 +87,54 @@ function detectText (bucketName, filename) {
       return Promise.all(tasks);
     });
 }
+// [END functions_ocr_detect]
+
+// [START functions_ocr_rename]
+/**
+ * Appends a .txt suffix to the image name.
+ *
+ * @param {string} filename Name of a file.
+ * @param {string} lang Language to append.
+ * @returns {string} The new filename.
+ */
+function renameImageForSave (filename, lang) {
+  return `${filename}_to_${lang}.txt`;
+}
+// [END functions_ocr_rename]
+
+// [START functions_ocr_process]
+/**
+ * Cloud Function triggered by Cloud Storage when a file is uploaded.
+ *
+ * @param {object} event The Cloud Functions event.
+ * @param {object} event.data A Google Cloud Storage File object.
+ */
+exports.processImage = function processImage (event) {
+  let file = event.data;
+
+  return Promise.resolve()
+    .then(() => {
+      if (file.resourceState === 'not_exists') {
+        // This was a deletion event, we don't want to process this
+        return;
+      }
+
+      if (!file.bucket) {
+        throw new Error('Bucket not provided. Make sure you have a "bucket" property in your request');
+      }
+      if (!file.name) {
+        throw new Error('Filename not provided. Make sure you have a "name" property in your request');
+      }
+
+      return detectText(file.bucket, file.name);
+    })
+    .then(() => {
+      console.log(`File ${file.name} processed.`);
+    });
+};
+// [END functions_ocr_process]
+
+// [START functions_ocr_translate]
 /**
  * Translates text using the Google Translate API. Triggered from a message on
  * a Pub/Sub topic.
@@ -131,6 +182,9 @@ exports.translateText = function translateText (event) {
       console.log(`Text translated to ${payload.lang}`);
     });
 };
+// [END functions_ocr_translate]
+
+// [START functions_ocr_save]
 /**
  * Saves the data packet to a file in GCS. Triggered from a message on a Pub/Sub
  * topic.
@@ -171,3 +225,4 @@ exports.saveResult = function saveResult (event) {
       console.log(`File saved.`);
     });
 };
+// [END functions_ocr_save]
