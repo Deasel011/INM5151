@@ -13,13 +13,63 @@
 # limitations under the License.
 
 # [START app]
+import base64
 import logging
 
-from flask import request
-
-from .GVC import GVC
 
 from flask import Flask
+from flask import request
+
+from google.cloud import storage
+import os
+import time
+
+
+class GVC:
+
+    def __init__(self):
+        self.client = storage.Client(project='inf5151-refrigerateur')
+        self.bucket = self.client.get_bucket('image_facture')
+        self.tmp_path =  os.getcwd() +'/tmp/'
+
+
+    def sendPicture(self,userid,picturebin64):
+        atomicTimestamp = time.time()
+        filename = userid + '_' + str(atomicTimestamp)
+
+        with open(self.tmp_path+filename+'.jpg', 'wb') as fh:
+           fh.write(picturebin64)
+
+        upload = self.bucket.blob(filename+'.jpg')
+        upload.upload_from_filename(self.tmp_path+filename+'.jpg')
+
+        os.remove(self.tmp_path+filename+'.jpg')
+
+        return 'no error'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Start of script application
 
 
 app = Flask(__name__)
@@ -38,9 +88,11 @@ def server_error(e):
     See logs for full stacktrace.
     """.format(e), 500
 
-@app.route('/upload',methods=['POST'])
-def upload():
-    data = request.files
+@app.route('/snd_fact/<userid>',methods=['POST'])
+def upload(userid):
+    data = request.data
+    return gvc.sendPicture(userid,data)
+
 
 
 
@@ -49,3 +101,10 @@ if __name__ == '__main__':
     # application on Google App Engine. See entrypoint in app.yaml.
     app.run(host='127.0.0.1', port=8080, debug=True)
 # [END app]
+
+
+
+
+
+
+
