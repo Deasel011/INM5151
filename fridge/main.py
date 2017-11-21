@@ -15,11 +15,15 @@
 # [START app]
 import logging
 
+from flask import request
+
+from .GVC import GVC
+
 from flask import Flask
 
 
 app = Flask(__name__)
-
+gvc = GVC()
 
 @app.route('/')
 def home():
@@ -33,6 +37,11 @@ def server_error(e):
     An internal error occurred: <pre>{}</pre>
     See logs for full stacktrace.
     """.format(e), 500
+
+@app.route('/upload',methods=['POST'])
+def upload():
+    data = request.files
+
 
 
 if __name__ == '__main__':

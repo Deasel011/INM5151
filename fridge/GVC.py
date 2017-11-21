@@ -1,19 +1,18 @@
 from google.cloud import storage
-
+import os
 import time
 
-from oauth2client.client import GOOGLE_APPLICATION_CREDENTIALS
 
 class GVC:
+
     def __init__(self):
-        client = storage.Client(credentials=GOOGLE_APPLICATION_CREDENTIALS)
-        bucket = client.get_bucket('image_facture')
+        self.client = storage.Client(project='inf5151-refrigerateur')
+        self.bucket = self.client.get_bucket('image_facture')
+        self.tmp_path =  os.getcwd() +'/tmp'
 
 
-    def sendPicture(self,userid,picture):
+    def sendPicture(self,userid,picturebin64):
         atomicTimestamp = time.time()
         filename = userid + '_' + atomicTimestamp
-
-
-gvc = GVC()
-gvc.client.list_buckets()
+        upload = bucket.blob(filename+'.fac')
+        upload.upload_from_filename(self.tmp_path+filename+'.fac')
