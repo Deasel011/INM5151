@@ -1,5 +1,5 @@
 Flask==0.12.2
 gunicorn==19.7.1
-google-api-python-client=1.6.4
-GoogleAppEngineCloudStorageClient=1.9.22.1
-google-cloud-storage=1.6.0
+google-api-python-client==1.6.4
+GoogleAppEngineCloudStorageClient==1.9.22.1
+google-cloud-storage==1.6.0
