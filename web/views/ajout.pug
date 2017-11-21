@@ -1,0 +1,11 @@
+//
+   Created by pdesl on 2017-11-21.
+script(src='js/oldquagga.js')
+doctype html
+html
+  body
+    p Choisir le type de numerisation
+    button Facture
+    | <form><div class="input-field"><label for="isbn_input">Code barre:</label><input id="isbn_input" class="isbn" type="text" /><button type="button" class="icon-barcode button scan">&nbsp;</button><input type="file" id="file" capture/></div></form>
+
+    script(src='/js/code-barre.js')
