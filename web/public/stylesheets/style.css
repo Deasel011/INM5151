@@ -7,3 +7,165 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+
+
+#interactive.viewport {
+    position: relative;
+}
+
+#interactive.viewport > canvas, #interactive.viewport > video {
+    max-width: 100%;
+    width: 100%;
+}
+
+canvas.drawing, canvas.drawingBuffer {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* line 16, ../sass/_viewport.scss */
+.controls fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 19, ../sass/_viewport.scss */
+.controls .input-group {
+  float: left;
+}
+/* line 21, ../sass/_viewport.scss */
+.controls .input-group input, .controls .input-group button {
+  display: block;
+}
+/* line 25, ../sass/_viewport.scss */
+.controls .reader-config-group {
+  float: right;
+}
+/* line 28, ../sass/_viewport.scss */
+.controls .reader-config-group label {
+  display: block;
+}
+/* line 30, ../sass/_viewport.scss */
+.controls .reader-config-group label span {
+  width: 9rem;
+  display: inline-block;
+  text-align: right;
+}
+/* line 37, ../sass/_viewport.scss */
+.controls:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* line 22, ../sass/_viewport.scss */
+#result_strip {
+  margin: 10px 0;
+  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
+  padding: 10px 0;
+}
+/* line 28, ../sass/_viewport.scss */
+#result_strip ul.thumbnails {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  width: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+/* line 37, ../sass/_viewport.scss */
+#result_strip ul.thumbnails > li {
+  display: inline-block;
+  vertical-align: middle;
+  width: 160px;
+}
+/* line 41, ../sass/_viewport.scss */
+#result_strip ul.thumbnails > li .thumbnail {
+  padding: 5px;
+  margin: 4px;
+  border: 1px dashed #CCC;
+}
+/* line 46, ../sass/_viewport.scss */
+#result_strip ul.thumbnails > li .thumbnail img {
+  max-width: 140px;
+}
+/* line 49, ../sass/_viewport.scss */
+#result_strip ul.thumbnails > li .thumbnail .caption {
+  white-space: normal;
+}
+/* line 51, ../sass/_viewport.scss */
+#result_strip ul.thumbnails > li .thumbnail .caption h4 {
+  text-align: center;
+  word-wrap: break-word;
+  height: 40px;
+  margin: 0px;
+}
+/* line 61, ../sass/_viewport.scss */
+#result_strip ul.thumbnails:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (max-width: 603px) {
+  /* line 2, ../sass/phone/_core.scss */
+  #container {
+    margin: 10px auto;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+@media (max-width: 603px) {
+  /* line 5, ../sass/phone/_viewport.scss */
+  .reader-config-group {
+    width: 100%;
+  }
+
+  .reader-config-group label > span {
+      width: 50%;
+  }
+
+  .reader-config-group label > select, .reader-config-group label > input {
+      max-width: calc(50% - 2px);
+  }
+
+  #interactive.viewport {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  /* line 20, ../sass/phone/_viewport.scss */
+  #result_strip {
+    margin-top: 5px;
+    padding-top: 5px;
+  }
+
+  #result_strip ul.thumbnails {
+    width: 100%;
+    height: auto;
+  }
+
+  /* line 24, ../sass/phone/_viewport.scss */
+  #result_strip ul.thumbnails > li {
+    width: 150px;
+  }
+  /* line 27, ../sass/phone/_viewport.scss */
+  #result_strip ul.thumbnails > li .thumbnail .imgWrapper {
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+  }
+  /* line 31, ../sass/phone/_viewport.scss */
+  #result_strip ul.thumbnails > li .thumbnail .imgWrapper img {
+    margin-top: -25px;
+    width: 130px;
+    height: 180px;
+  }
+}

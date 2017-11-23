@@ -88,9 +88,9 @@ swal({
 }).then(function (result) {
   if (result.value) {
     swal(
-      'HA',
-      'HAHA',
-      'HAHAHA'
+      'Lets',
+      'Go!!!',
+      'success'
     )
   }
   Quagga.stop();
