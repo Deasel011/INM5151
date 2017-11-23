@@ -10,6 +10,8 @@ var users = require('./routes/users');
 var ajout = require('./routes/ajout');
 var produit = require('./routes/produit');
 var ajout_code_barre = require('./routes/ajout_code_barre');
+var produits = require('./routes/produits');
+var home = require('./routes/home');
 
 var app = express();
 
@@ -29,6 +31,8 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/ajout',ajout);
 app.use('/produit',produit);
+app.use('/produits',produits);
+app.use('/home',home);
 app.use('/ajout_code_barre',file_input);
 
 // catch 404 and forward to error handler
