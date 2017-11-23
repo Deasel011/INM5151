@@ -14,7 +14,7 @@ block content
             br
         .row
           .col-md-9.col-md-offset-5
-            a.btn.btn-success.btn-lg(href="#")
+            a.btn.btn-success.btn-lg(href="#").code-barre
               span.glyphicon.glyphicon-barcode
               |  Numériser un code-barres
             br
@@ -25,3 +25,8 @@ block content
               |  Numériser une facture
         .row
           .col-md-4.col-md-offset-5
+
+  script(src='js/capture.js')
+  script(src='dist/sweetalert2.js')
+  link(rel='stylesheet', href='dist/sweetalert2.css')
+  script(src='js/index.js')
