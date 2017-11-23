@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var ajout = require('./routes/ajout');
 var produit = require('./routes/produit');
+var ajout_code_barre = require('./routes/ajout_code_barre');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/ajout',ajout);
 app.use('/produit',produit);
+app.use('/ajout_code_barre',file_input);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
