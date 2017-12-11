@@ -1,0 +1,22 @@
+delete from categorieproduit;
+
+insert into CategorieProduit (nom) values ('Vegetable')
+,('Meat')
+,('Spice')
+,('Dairy')
+,('Grain')
+,('Nut')
+,('Poultry')
+,('Egg')
+,('Seafood')
+,('Tomato')
+,('Cereal')
+,('Wine')
+,('Beer')
+,('Fruit')
+,('Apple')
+,('Orange')
+,('Pineapple')
+,('Potato')
+,('Unknown')
+;
