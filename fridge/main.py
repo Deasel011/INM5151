@@ -15,6 +15,7 @@
 # [START app]
 import base64
 import logging
+import psycopg2
 
 
 from flask import Flask
@@ -48,8 +49,16 @@ class GVC:
         return 'no error'
 
 
+class GSQL:
+    def __init__(self):
+        self.conn = psycopg2.connect(user='postgres',password='postgres',host='35.194.89.41', port='5432')
 
-
+    def select_produits(self):
+        cur = self.conn.cursor()
+        cur.execute("""Select * from CategorieProduit""")
+        rows = cur.fetchall()
+        for row in rows:
+            print("     ", row[0])
 
 
 
