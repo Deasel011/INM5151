@@ -15,6 +15,7 @@
 # [START app]
 import base64
 import logging
+import psycopg2
 
 
 from flask import Flask
@@ -48,8 +49,16 @@ class GVC:
         return 'no error'
 
 
+class GSQL:
+    def __init__(self):
+        self.conn = psycopg2.connect(user='postgres',password='postgres',host='35.194.89.41', port='5432')
 
-
+    def select_produits(self):
+        cur = self.conn.cursor()
+        cur.execute("""Select * from CategorieProduit""")
+        rows = cur.fetchall()
+        for row in rows:
+            print("     ", row[0])
 
 
 
@@ -89,9 +98,21 @@ def server_error(e):
     """.format(e), 500
 
 @app.route('/snd_fact/<userid>',methods=['POST'])
-def upload(userid):
+def upload_fact(userid):
     data = request.data
     return gvc.sendPicture(userid,data)
+
+@app.route('/snd_code_barre/<userid>/<no_code>',methods=['POST'])
+def upload_code_barre(userid,no_code):
+    return 'Coming soon'
+
+@app.route('/inventaire/<userid>',methods=['GET'])
+def get_inventaire(userid):
+    return "[{'nom':'tomate','poids':'2lb'},{'nom':'patate','poids':'5lb'},{'nom':'poivron','poids':'3lb'}]"
+
+@app.route('/snd_produit_man/<userid>/<produit>/<quantite>/<date>',methods=['POST'])
+def upload_manuel_produit(userid,produit,quantite,date):
+    return "{'nom':'hello'}"
 
 
 

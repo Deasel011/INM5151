@@ -14,14 +14,24 @@ block content
             br
         .row
           .col-md-9.col-md-offset-5
-            a.btn.btn-success.btn-lg(href="#")
+            a.btn.btn-success.btn-lg(href="#").code-barre
               span.glyphicon.glyphicon-barcode
               |  Numériser un code-barres
             br
             br
             br
-            a.btn.btn-success.btn-lg(href="#")
+            a.btn.btn-success.btn-lg(href="#").facture
               span.glyphicon.glyphicon-list-alt
               |  Numériser une facture
         .row
           .col-md-4.col-md-offset-5
+
+  script(src='//code.jquery.com/jquery-1.11.0.min.js')
+  script(src='//webrtc.github.io/adapter/adapter-latest.js')
+  script(src='js/capture.js')
+  script(src='js/live_w_locator.js')
+  script(src='dist/sweetalert2.js')
+  script(src='js/quagga.min.js')
+  link(rel='stylesheet', href='dist/sweetalert2.css')
+  link(rel='stylesheet', href='stylesheets/style.css')
+  script(src='js/index.js')

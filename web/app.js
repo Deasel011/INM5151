@@ -9,10 +9,12 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var ajout = require('./routes/ajout');
 var produit = require('./routes/produit');
+var ajout_code_barre = require('./routes/file_input');
 var produits = require('./routes/produits');
 var recettes = require('./routes/recettes');
 var recette = require('./routes/recette');
 var home = require('./routes/home');
+var capture = require('./routes/capture');
 
 var app = express();
 
@@ -36,6 +38,8 @@ app.use('/produits',produits);
 app.use('/recettes',recettes);
 app.use('/recette',recette);
 app.use('/home',home);
+app.use('/ajout_code_barre',ajout_code_barre);
+app.use('/capture',capture);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

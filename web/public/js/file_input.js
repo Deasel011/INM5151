@@ -3,6 +3,10 @@ $(function() {
         init: function() {
             App.attachListeners();
         },
+        config: {
+            reader: "code_128",
+            length: 10
+        },
         attachListeners: function() {
             var self = this;
 
@@ -29,6 +33,7 @@ $(function() {
                 console.log("Value of "+ state + " changed to " + value);
                 self.setState(state, value);
             });
+
         },
         _accessByPath: function(obj, path, val) {
             var parts = path.split('.'),
@@ -51,6 +56,7 @@ $(function() {
             $(".controls input[type=file]").off("change");
             $(".controls .reader-config-group").off("change", "input, select");
             $(".controls button").off("click");
+
         },
         decode: function(src) {
             var self = this,
@@ -101,13 +107,13 @@ $(function() {
         },
         state: {
             inputStream: {
-                size: 800,
-                singleChannel: false
+                size: 800
             },
             locator: {
                 patchSize: "medium",
-                halfSample: true
+                halfSample: false
             },
+            numOfWorkers: 1,
             decoder: {
                 readers: [{
                     format: "code_128_reader",
@@ -121,33 +127,9 @@ $(function() {
 
     App.init();
 
-    function calculateRectFromArea(canvas, area) {
-        var canvasWidth = canvas.width,
-            canvasHeight = canvas.height,
-            top = parseInt(area.top)/100,
-            right = parseInt(area.right)/100,
-            bottom = parseInt(area.bottom)/100,
-            left = parseInt(area.left)/100;
-
-        top *= canvasHeight;
-        right = canvasWidth - canvasWidth*right;
-        bottom = canvasHeight - canvasHeight*bottom;
-        left *= canvasWidth;
-
-        return {
-            x: left,
-            y: top,
-            width: right - left,
-            height: bottom - top
-        };
-    }
-
     Quagga.onProcessed(function(result) {
-        console.log('processed');
-
         var drawingCtx = Quagga.canvas.ctx.overlay,
-            drawingCanvas = Quagga.canvas.dom.overlay,
-            area;
+            drawingCanvas = Quagga.canvas.dom.overlay;
 
         if (result) {
             if (result.boxes) {
@@ -164,21 +146,12 @@ $(function() {
             }
 
             if (result.codeResult && result.codeResult.code) {
-                console.log(result.codeResult.code);
                 Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
             }
-
-            if (App.state.inputStream.area) {
-                area = calculateRectFromArea(drawingCanvas, App.state.inputStream.area);
-                drawingCtx.strokeStyle = "#0F0";
-                drawingCtx.strokeRect(area.x, area.y, area.width, area.height);
-            }
-    }
+        }
     });
 
     Quagga.onDetected(function(result) {
-        console.log('detected');
-
         var code = result.codeResult.code,
             $node,
             canvas = Quagga.canvas.dom.image;
