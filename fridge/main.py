@@ -114,6 +114,10 @@ def get_inventaire(userid):
 def upload_manuel_produit(userid,produit,quantite,date):
     return "{'nom':'hello'}"
 
+@app.route('/ajout/<userid>/<codebarre>', methods=['POST'])
+def upload_code_barre(userid,codebarre):
+    return "{'success':'true'}"
+
 
 
 

@@ -9,12 +9,12 @@ class GSQL:
     def __init__(self):
         self.conn = psycopg2.connect(dbname='sf', user='postgres',password='postgres',host='35.194.89.41', port='5432')
 
-    def select_produits(self):
+    def select_cat_produits(self):
         cur = self.conn.cursor()
-        cur.execute("""Select nom from CategorieProduit""")
+        cur.execute("""Select id_categorie_produit, nom from CategorieProduit""")
         rows = cur.fetchall()
         for row in rows:
-            print(row)
+            print(str(row[0])+' '+str(row[1]))
         cur.close()
 
     def insert_produit_inventorie(self, userid, date_exp, inventoryproductid,quantity):
@@ -29,9 +29,16 @@ class GSQL:
 
     def select_produit_inventorie_usager(self, userid):
         cur = self.conn.cursor()
-        cur.execure
-
+        cur.execute("select * from ProduitInventorie")
+        rows = cur.fetchall()
+        product_dict = {}
+        print('Produits:')
+        for row in rows:
+            print(row)
+            #product_dict[]
+        cur.close()
 
 sql = GSQL()
-sql.select_produits()
+sql.select_cat_produits()
+#sql.select_produit_inventorie_usager(1);
 #sql.insert_produit_inventorie(0,MOCK_EXP,1)
