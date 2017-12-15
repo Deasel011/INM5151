@@ -3,10 +3,11 @@ extends layout
 block content
   script(src='js/produits.js')
   .panel.panel-default
-    .panel-heading Mon Frigo
+    .panel-heading 
+      | Mon Frigo
       div(align="right")
-            a.btn.btn-info(href="produit")
-              span.glyphicon.glyphicon-plus
+        a.btn.btn-info(href="produit")
+          span.glyphicon.glyphicon-plus
     .panel-body
       .container
         ul#listeProduits.list-group
