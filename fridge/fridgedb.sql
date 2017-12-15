@@ -33,7 +33,8 @@ id_produit serial PRIMARY key
 create table ProduitInventorie (
 id_produit_inventorie serial primary KEY
 ,id_produit Int
-,code_barre INT
+,code_barre BIGINT
+ ,quantite varchar(15)
 ,CONSTRAINT FK_ProduitInventorie_Produit FOREIGN key (id_produit) REFERENCES Produit(id_produit)
 );
 

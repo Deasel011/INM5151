@@ -29,14 +29,15 @@ class GSQL:
 
     def select_inventaire_usager(self, userid):
         cur = self.conn.cursor()
-        cur.execute("select * from ProduitInventorie")
+        cur.execute("select p.nom, h.quantite from h_produitinventorie h join produitinventorie pi on pi.id_produit_inventorie = h.id_produit_inventorie join produit p on pi.id_produit = p.id_produit")
         rows = cur.fetchall()
-        product_dict = {}
+        product_dict = []
         print('Produits:')
         for row in rows:
-            print(row)
-            #product_dict[]
+            print(str(row[0]) + ' '+ str(row[1]))
+            product_dict.append({"nom":row[0],"quantite":row[1]})
         cur.close()
+        print(product_dict)
 
     def select_insert_produit_codebarre_usager(self, userid,code_barre):
         cbstr = str(code_barre)
@@ -51,4 +52,5 @@ sql = GSQL()
 #sql.select_cat_produits()
 #sql.select_produit_inventorie_usager(1);
 #sql.insert_produit_inventorie(0,MOCK_EXP,1)
-sql.select_insert_produit_codebarre_usager(0,14010010)
+#sql.select_insert_produit_codebarre_usager(0,14010010)
+sql.select_inventaire_usager(0)
