@@ -1,0 +1,16 @@
+[{
+		"id": 1,
+		"nom": "Salade de haricots verts et tomates",
+		"img": "https://www.metro.ca/userfiles/image/recipes/Salade-haricots-verts-lardons-tomates-2918.jpg"
+	},
+	{
+		"id": 2,
+		"nom": "Pommes de terre dauphinoises",
+		"img": "https://www.metro.ca/userfiles/image/recipes/pommes-terre-dauphinoises-7180.jpg"
+	},
+	{
+		"id": 3,
+		"nom": "Garniture au poulet et aux amandes",
+		"img": "https://www.metro.ca/userfiles/image/recipes/Garniture-poulet-amandes-94.jpg"
+	}
+]

@@ -58,3 +58,22 @@ facture.addEventListener('click',function(){
     setTimeout(initCapture(),500);
 
 });
+
+function sendCodeBarre(codebarre) {
+    var userid = 0;
+    $.ajax({
+		type : 'POST',
+		url : "http://inf5151-refrigerateur.appspot.com/ajout/"+ userid +"/"+ codebarre,
+		contentType : "application/json; charset=utf-8",
+		dataType : 'json',
+		data : body,
+		cache: false,
+		processData : false,
+		success : function() {
+			
+		},
+		error : function() {
+			
+		}
+	});
+}

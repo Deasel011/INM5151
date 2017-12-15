@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        url: "/recettes/getAll",
+        url: "/resources/getAll",
         dataType: "json",
         success: function (data) {
           var listeBody = '';

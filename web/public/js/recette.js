@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        url: "/recettes/" + id,
+        url: "/resources/" + id,
         dataType: "json",
         success: function (data) {
           var listeBody = '';
