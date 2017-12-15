@@ -1,3 +1,27 @@
+function send_code_barre(codebarre) {
+    var userid = 0;
+    var proxy = 'https://cors-anywhere.herokuapp.com/';
+    $.ajax({
+        type: "POST",
+        url: proxy + "http://inf5151-refrigerateur.appspot.com/ajout/" + userid + "/" + codebarre
+    }).done(function (data) {
+        var listeBody = '';
+        $.each(data, function (i, item) {
+            console.log(item.success);
+            // listeBody += '<li class="list-group-item">';
+            // listeBody += '<img src="images/produits/' + item.nom.replace(/ |'/gi, "_") + '.png" alt="" height="42" width="42">';
+            // listeBody += '<b> ' + item.nom + '</b><span class="badge">' + item.quantite + '</span></li>';
+        });
+    });
+}
+
+function parseForCodeBarres(){
+    code_list = document.querySelectorAll("#result_strip > .thumbnails > li > .thumbnail > .caption > .code");
+    code_list.forEach(function(elem){
+        send_code_barre(elem.innerText)
+    })
+}
+
 var code_barre = document.getElementsByClassName('code-barre')[0];
 code_barre.addEventListener('click',function () {
 swal({
@@ -13,12 +37,13 @@ swal({
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Retour'
+  confirmButtonText: 'Envoyer'
 }).then(function (result) {
   if (result.value) {
+      parseForCodeBarres();
     swal(
-      'Lets',
-      'Go!!!',
+      "C'est parti!",
+      "Les modifications devraient apparaitre dans l'inventaire *si applicable.",
       'success'
     )
   }
