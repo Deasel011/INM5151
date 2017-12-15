@@ -1,0 +1,22 @@
+{
+	"id": 1,
+	"nom": "Salade de haricots verts et tomates",
+	"ingredients": [{
+			"nom": "Haricots verts",
+			"qnt": "750 ml (3 tasses)"
+		},
+		{
+			"nom": "Lardons",
+			"qnt": "120 g (4 oz)"
+		},
+		{
+			"nom": "Vinaigre balsamique",
+			"qnt": "60 ml (1/4 tasse)"
+		},
+		{
+			"nom": "Huile d'olive",
+			"qnt": "125 ml (1/2 tasse)"
+		}
+	],
+	"preparation": "Dans une grande casserole, faire bouillir de l'eau et la saler légèrement. Ajouter les haricots verts et les faire cuire environ 5 minutes ou jusqu'à ce qu'ils commencent à être tendres mais encore croquants. Refroidir sous l'eau froide, égoutter et réserver. Dans un poêlon, faire cuire les lardons à feu moyen vif pendant environ 5 minutes ou jusqu'à ce qu'ils commencent à être dorés et croustillants. Réserver. Dans un petit bol, mélanger le vinaigre balsamique, l'huile, le sel et le poivre. Dans un grand bol de service, combiner les haricots, les lardons et les tomates. Verser le mélange de vinaigre et d'huile sur les légumes, bien mélanger et servir."
+}

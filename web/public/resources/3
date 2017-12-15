@@ -1,0 +1,22 @@
+{
+	"id": 3,
+	"nom": "Garniture au poulet et aux amandes",
+	"ingredients": [{
+			"nom": "Poulet cuit, haché",
+			"qnt": "375 ml (1 1/2 tasse)"
+		},
+		{
+			"nom": "Amandes grillées, hachées",
+			"qnt": "125 ml (1/2 tasse)"
+		},
+		{
+			"nom": "Mayonnaise",
+			"qnt": "190 ml (3/4 tasse)"
+		},
+		{
+			"nom": "Sel de céleri",
+			"qnt": "1 pincée"
+		}
+	],
+	"preparation": "Dans un bol, mélanger le poulet cuit et les amandes. Incorporer la mayonnaise et le sel de céleri. Assaisonner de sel et poivre."
+}

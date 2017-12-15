@@ -1,24 +1,12 @@
 extends layout
 
 block content
+  script(src='js/produits.js')
   .panel.panel-default
-        .panel-heading
-          | Mon Frigo 
-          div(align="right")
+    .panel-heading Mon Frigo
+      div(align="right")
             a.btn.btn-info(href="produit")
               span.glyphicon.glyphicon-plus
-        .panel-body
-          .container
-            ul.list-group
-              li.list-group-item
-                img(src="images/tomate.png", alt="Tomate", height="42", width="42")
-                |  Tomate 
-                span.badge 2 lb.
-              li.list-group-item
-                img(src="images/patate.png", alt="Patate", height="42", width="42")
-                |  Patate 
-                span.badge 5 lb.
-              li.list-group-item
-                img(src="images/poivron.png", alt="Poivron", height="42", width="42")
-                |  Poivron 
-                span.badge 3 lb.
+    .panel-body
+      .container
+        ul#listeProduits.list-group
