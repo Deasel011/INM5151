@@ -80,10 +80,9 @@ class GSQL:
         product_dict = []
         print('Produits:')
         for row in rows:
-            print(str(row[0]) + ' '+ str(row[1]))
             product_dict.append({"nom":row[0],"quantite":row[1]})
         cur.close()
-        print(product_dict)
+        return product_dict
 
     def select_insert_produit_codebarre_usager(self, userid,code_barre):
         cbstr = str(code_barre)
@@ -134,7 +133,7 @@ def server_error(e):
 def get_inventaire(userid):
     sql = GSQL()
     res = sql.select_inventaire_usager(userid)
-    return Response(json.dimps(res), mimetype='application/json')
+    return Response(json.dumps(res), mimetype='application/json')
 
 @app.route('/snd_produit_man/<userid>/<produit>/<quantite>/<date>',methods=['POST'])
 def upload_manuel_produit(userid,produit,quantite,date):
