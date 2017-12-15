@@ -26,7 +26,9 @@ from flask import Response
 from google.cloud import storage
 import os
 import time
+import datetime
 
+TEST_USER = 0
 
 class GVC:
 
@@ -75,24 +77,28 @@ class GSQL:
 
     def select_inventaire_usager(self, userid):
         cur = self.conn.cursor()
-        cur.execute("select p.nom, h.quantite from h_produitinventorie h join produitinventorie pi on pi.id_produit_inventorie = h.id_produit_inventorie join produit p on pi.id_produit = p.id_produit")
+        cur.execute("select nom, quantite from v_inventaire where code_usager = %s",(TEST_USER,))
         rows = cur.fetchall()
         product_dict = []
-        print('Produits:')
         for row in rows:
             product_dict.append({"nom":row[0],"quantite":row[1]})
         cur.close()
         return product_dict
 
-    def select_insert_produit_codebarre_usager(self, userid,code_barre):
-        cbstr = str(code_barre)
+    def insert_produit_codebarre_usager(self, userid,code_barre):
         product_cur = self.conn.cursor()
-        product_cur.execute("select id_produit_inventorie from ProduitInventorie where code_barre = %s ",(cbstr))
-        rows = product_cur.fetch_all()
+        product_cur.execute("select id_produit_inventorie, quantite from ProduitInventorie where code_barre = %s::bigint ",(code_barre,))
+        rows = product_cur.fetchall()
+        id = None
+        quant = None
         for row in rows:
-            print(row)
+            id = row[0]
+            quant = row[1]
         product_cur.close()
-
+        cur = self.conn.cursor()
+        cur.execute("insert into h_produitinventorie (id_produit_inventorie, id_code_modification, quantite, cree_le, code_usager) values (%s,2,%s,%s,%s);",(id,quant,datetime.datetime.now(),TEST_USER))
+        self.conn.commit()
+        cur.close()
 
 
 
@@ -141,7 +147,12 @@ def upload_manuel_produit(userid,produit,quantite,date):
 
 @app.route('/ajout/<userid>/<codebarre>', methods=['POST'])
 def upload_code_barre(userid,codebarre):
-    return "{'success':'true'}"
+    try:
+        sql = GSQL()
+        sql.insert_produit_codebarre_usager(userid,codebarre)
+    except BaseException as e:
+        return Response(json.dumps({'success':'false'}),mimetype='application/json')
+    return Response(json.dumps({'success':'true'}),mimetype='application/json')
 
 
 
