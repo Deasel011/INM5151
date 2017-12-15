@@ -17,7 +17,7 @@ class GSQL:
             print(str(row[0])+' '+str(row[1]))
         cur.close()
 
-    def insert_produit_inventorie(self, userid, date_exp, inventoryproductid,quantity):
+    def insert_produit_inventorie(self, userid, productid,quantity):
         created_date = datetime.datetime.now()
         modified_date = created_date
         print(modified_date)
