@@ -97,15 +97,6 @@ def server_error(e):
     See logs for full stacktrace.
     """.format(e), 500
 
-@app.route('/snd_fact/<userid>',methods=['POST'])
-def upload_fact(userid):
-    data = request.data
-    return gvc.sendPicture(userid,data)
-
-@app.route('/snd_code_barre/<userid>/<no_code>',methods=['POST'])
-def upload_code_barre(userid,no_code):
-    return 'Coming soon'
-
 @app.route('/inventaire/<userid>',methods=['GET'])
 def get_inventaire(userid):
     return "[{'nom':'tomate','poids':'2lb'},{'nom':'patate','poids':'5lb'},{'nom':'poivron','poids':'3lb'}]"

@@ -35,10 +35,6 @@ id_produit_inventorie serial primary KEY
 ,id_produit Int
 ,code_barre INT
 ,CONSTRAINT FK_ProduitInventorie_Produit FOREIGN key (id_produit) REFERENCES Produit(id_produit)
-,code_usager varchar(15)
-,date_exp DATE
-,cree_le DATE
-, modifie_le DATE
 );
 
 
@@ -55,5 +51,7 @@ id_produit_inventorie int
 ,id_h_prod_inv serial PRIMARY KEY
 ,quantite varchar(10)
 ,id_code_modification int
+,cree_le DATE
+,code_usager INT
 , CONSTRAINT FK_ProduitInventorie_CodeModification FOREIGN key (id_code_modification) REFERENCES CodeModification(id_code_modification)
 );

@@ -27,7 +27,7 @@ class GSQL:
         cur.execute("insert into CodeModification (code_modification, description_modification) values (%s,%s)",(code,description))
         cur.close()
 
-    def select_produit_inventorie_usager(self, userid):
+    def select_inventaire_usager(self, userid):
         cur = self.conn.cursor()
         cur.execute("select * from ProduitInventorie")
         rows = cur.fetchall()
@@ -38,7 +38,17 @@ class GSQL:
             #product_dict[]
         cur.close()
 
+    def select_insert_produit_codebarre_usager(self, userid,code_barre):
+        cbstr = str(code_barre)
+        product_cur = self.conn.cursor()
+        product_cur.execute("select id_produit_inventorie from ProduitInventorie where code_barre = %s ",(cbstr))
+        rows = product_cur.fetch_all()
+        for row in rows:
+            print(row)
+        product_cur.close()
+
 sql = GSQL()
-sql.select_cat_produits()
+#sql.select_cat_produits()
 #sql.select_produit_inventorie_usager(1);
 #sql.insert_produit_inventorie(0,MOCK_EXP,1)
+sql.select_insert_produit_codebarre_usager(0,14010010)
