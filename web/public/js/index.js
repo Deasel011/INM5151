@@ -18,7 +18,7 @@ function send_code_barre(codebarre) {
 function parseForCodeBarres(){
     code_list = document.querySelectorAll("#result_strip > .thumbnails > li > .thumbnail > .caption > .code");
     code_list.forEach(function(elem){
-        console.log(elem.innerText)
+        send_code_barre(elem.innerText)
     })
 }
 
@@ -42,8 +42,8 @@ swal({
   if (result.value) {
       parseForCodeBarres();
     swal(
-      'Lets',
-      'Go!!!',
+      "C'est parti!",
+      "Les modifications devraient apparaitre dans l'inventaire *si applicable.",
       'success'
     )
   }
