@@ -8,9 +8,6 @@ function send_code_barre(codebarre) {
         var listeBody = '';
         $.each(data, function (i, item) {
             console.log(item.success);
-            // listeBody += '<li class="list-group-item">';
-            // listeBody += '<img src="images/produits/' + item.nom.replace(/ |'/gi, "_") + '.png" alt="" height="42" width="42">';
-            // listeBody += '<b> ' + item.nom + '</b><span class="badge">' + item.quantite + '</span></li>';
         });
     });
 }
@@ -83,22 +80,3 @@ facture.addEventListener('click',function(){
     setTimeout(initCapture(),500);
 
 });
-
-function sendCodeBarre(codebarre) {
-    var userid = 0;
-    $.ajax({
-		type : 'POST',
-		url : "http://inf5151-refrigerateur.appspot.com/ajout/"+ userid +"/"+ codebarre,
-		contentType : "application/json; charset=utf-8",
-		dataType : 'json',
-		data : body,
-		cache: false,
-		processData : false,
-		success : function() {
-			
-		},
-		error : function() {
-			
-		}
-	});
-}
