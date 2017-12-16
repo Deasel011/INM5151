@@ -10,7 +10,7 @@ $(document).ready(function () {
     var listeBody = '';
     $.each(data, function (i, item) {
       listeBody += '<li class="list-group-item">';
-      listeBody += '<img src="images/produits/' + item.nom.replace(/ |'/gi, "_") + '.png" alt="" height="42" width="42">';
+      listeBody += '<img src="images/produits/' + item.nom.replace(/ |'/gi, "_").toLowerCase() + '.png" alt="" height="42" width="42">';
       listeBody += '<b> ' + item.nom + '</b><span class="badge">' + item.quantite + '</span></li>';
     });
     $("#listeProduits").html(listeBody);
