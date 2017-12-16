@@ -15,7 +15,6 @@ $(document).ready(function () {
           $('ul.list-group li').click(function(e) 
           { 
            window.location.replace("/recette/"+ $(this).attr('id'));
-           //window.location.href = "/recette/"+ $(this).attr('id');
           });
     
         },
