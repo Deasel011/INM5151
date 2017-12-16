@@ -85,6 +85,16 @@ class GSQL:
         cur.close()
         return product_dict
 
+    def select_recettes_usager(self, userid):
+        cur = self.conn.cursor()
+        cur.execute("select nom from v_recette_disponible where code_usager = %s",(TEST_USER,))
+        rows = cur.fetchall()
+        product_dict = []
+        for row in rows:
+            product_dict.append({"nom":row[0]})
+        cur.close()
+        return product_dict
+
     def insert_produit_codebarre_usager(self, userid,code_barre):
         product_cur = self.conn.cursor()
         product_cur.execute("select id_produit_inventorie, quantite from ProduitInventorie where code_barre = %s::bigint ",(code_barre,))
@@ -139,6 +149,12 @@ def server_error(e):
 def get_inventaire(userid):
     sql = GSQL()
     res = sql.select_inventaire_usager(userid)
+    return Response(json.dumps(res), mimetype='application/json')
+
+@app.route('/recette/<userid>', methods=['GET'])
+def get_recettes(userid):
+    sql = GSQL()
+    res = sql.select_recettes_usager(userid)
     return Response(json.dumps(res), mimetype='application/json')
 
 @app.route('/snd_produit_man/<userid>/<produit>/<quantite>/<date>',methods=['POST'])
