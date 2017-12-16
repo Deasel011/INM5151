@@ -1,9 +1,12 @@
+drop table if EXISTS Substitution;
+drop table if EXISTS Ingredient;
 drop table if EXISTS h_produitinventorie;
 drop table if EXISTS codemodification;
 drop table if EXISTS produitinventorie;
 drop table if EXISTS produit;
 drop table if EXISTS categorieparent;
 drop table if EXISTS categorieproduit;
+drop table if EXISTS recette;
 
 create table CategorieProduit (
 id_categorie_produit SERIAL PRIMARY KEY
@@ -56,3 +59,28 @@ id_produit_inventorie int
 ,code_usager INT
 , CONSTRAINT FK_ProduitInventorie_CodeModification FOREIGN key (id_code_modification) REFERENCES CodeModification(id_code_modification)
 );
+
+create table Recette (
+id_recette INT
+, nom varchar(250)
+, description varchar(200)
+, preparation varchar(max)
+)
+
+create table Ingredient (
+  id_recette INT
+, constraint FK_ingredient_recette FOREIGN KEY (id_recette) REFERENCES  Recette (id_recette)
+, id_produit int
+, constraint FK_ingredient_produit FOREIGN key (id_produit) REFERENCES Produit(id_produit)
+, quantite varchar(25)
+, constraint BK_ingredient UNIQUE (id_produit,id_recette)
+)
+
+create table Substitution (
+  id_produit_original int
+, constraint FK_substition_produit FOREIGN key (id_produit_original) REFERENCES Produit(id_produit)
+, id_categorie_substitue int
+, id_produit_substitue int
+, constraint FK_substitution_produit_sub FOREIGN key (id_produit_substitue)
+, constraint FK_substitution_cat_sub FOREIGN key (id_categorie_substitue)
+)
